@@ -30,13 +30,13 @@
         "tsConfigPath": "apps/auth/tsconfig.app.json"
       }
     },
-    "payments": {
+    "bonds": {
       "type": "application",
-      "root": "apps/payments",
+      "root": "apps/bonds",
       "entryFile": "main",
-      "sourceRoot": "apps/payments/src",
+      "sourceRoot": "apps/bonds/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/payments/tsconfig.app.json"
+        "tsConfigPath": "apps/bonds/tsconfig.app.json"
       }
     },
     "notifications": {

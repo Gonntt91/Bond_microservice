@@ -16,6 +16,7 @@ import {
 } from './models/bonds.schema';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { WalletModule } from './wallet/wallet.module';
 
 @Module({
   imports: [
@@ -60,6 +61,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       },
     ]),
     HealthModule,
+    WalletModule,
   ],
   controllers: [bondsController],
   providers: [bondsService, bondsRepository],
