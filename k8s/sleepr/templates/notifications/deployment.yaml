@@ -15,7 +15,7 @@ spec:
         app: notifications
     spec:
       containers:
-        - image: us-east4-docker.pkg.dev/sleepr-378423/notifications/production
+        - image: us-east4-docker.pkg.dev/bonds-378423/notifications/production
           name: notifications
           env:
             - name: PORT
@@ -33,6 +33,6 @@ spec:
                   name: google
                   key: refreshToken
             - name: SMTP_USER
-              value: sleeprnestapp@gmail.com
+              value: bondsnestapp@gmail.com
           ports:
             - containerPort: 3000
