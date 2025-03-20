@@ -23,14 +23,14 @@ services:
       - '3001:3001'
     volumes:
       - .:/usr/src/app
-  payments:
+  bonds:
     build:
       context: .
-      dockerfile: ./apps/payments/Dockerfile
+      dockerfile: ./apps/bonds/Dockerfile
       target: development
-    command: pnpm run start:dev payments
+    command: pnpm run start:dev bonds
     env_file:
-      - ./apps/payments/.env
+      - ./apps/bonds/.env
     volumes:
       - .:/usr/src/app
   notifications:
