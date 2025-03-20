@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import * as Joi from 'joi';
-import { ReservationsService } from './bonds.service';
-import { ReservationsController } from './bonds.controller';
+import { bondsService } from './bonds.service';
+import { bondsController } from './bonds.controller';
 import {
   DatabaseModule,
   LoggerModule,
@@ -9,10 +9,10 @@ import {
   PAYMENTS_SERVICE,
   HealthModule,
 } from '@app/common';
-import { ReservationsRepository } from './bonds.repository';
+import { bondsRepository } from './bonds.repository';
 import {
   BondDocument,
-  ReservationSchema,
+  bondschema,
 } from './models/bonds.schema';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
@@ -21,7 +21,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
   imports: [
     DatabaseModule,
     DatabaseModule.forFeature([
-      { name: BondDocument.name, schema: ReservationSchema },
+      { name: BondDocument.name, schema: bondschema },
     ]),
     LoggerModule,
     ConfigModule.forRoot({
@@ -61,7 +61,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     ]),
     HealthModule,
   ],
-  controllers: [ReservationsController],
-  providers: [ReservationsService, ReservationsRepository],
+  controllers: [bondsController],
+  providers: [bondsService, bondsRepository],
 })
-export class ReservationsModule {}
+export class bondsModule {}

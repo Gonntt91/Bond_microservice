@@ -8,14 +8,14 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ReservationsService } from './bonds.service';
+import { bondsService } from './bonds.service';
 import { CreateBondDto } from './dto/create-bond.dto';
 import { UpdateBondDto } from './dto/update-bond.dto';
 import { CurrentUser, JwtAuthGuard, Roles, UserDto } from '@app/common';
 
-@Controller('reservations')
-export class ReservationsController {
-  constructor(private readonly reservationsService: ReservationsService) {}
+@Controller('bonds')
+export class bondsController {
+  constructor(private readonly bondsService: bondsService) {}
 
   @UseGuards(JwtAuthGuard)
   @Post()
@@ -23,19 +23,19 @@ export class ReservationsController {
     @Body() createReservationDto: CreateBondDto,
     @CurrentUser() user: UserDto,
   ) {
-    return this.reservationsService.create(createReservationDto, user);
+    return this.bondsService.create(createReservationDto, user);
   }
 
   @Get()
   @UseGuards(JwtAuthGuard)
   async findAll() {
-    return this.reservationsService.findAll();
+    return this.bondsService.findAll();
   }
 
   @Get(':id')
   @UseGuards(JwtAuthGuard)
   async findOne(@Param('id') id: string) {
-    return this.reservationsService.findOne(id);
+    return this.bondsService.findOne(id);
   }
 
   @Patch(':id')
@@ -44,13 +44,13 @@ export class ReservationsController {
     @Param('id') id: string,
     @Body() updateReservationDto: UpdateBondDto,
   ) {
-    return this.reservationsService.update(id, updateReservationDto);
+    return this.bondsService.update(id, updateReservationDto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   @Roles('Admin')
   async remove(@Param('id') id: string) {
-    return this.reservationsService.remove(id);
+    return this.bondsService.remove(id);
   }
 }

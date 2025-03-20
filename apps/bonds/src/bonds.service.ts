@@ -2,14 +2,14 @@ import { Inject, Injectable } from '@nestjs/common';
 import { PAYMENTS_SERVICE, UserDto } from '@app/common';
 import { CreateBondDto } from './dto/create-bond.dto';
 import { UpdateBondDto } from './dto/update-bond.dto';
-import { ReservationsRepository } from './bonds.repository';
+import { bondsRepository } from './bonds.repository';
 import { ClientProxy } from '@nestjs/microservices';
 import { map } from 'rxjs';
 
 @Injectable()
-export class ReservationsService {
+export class bondsService {
   constructor(
-    private readonly reservationsRepository: ReservationsRepository,
+    private readonly bondsRepository: bondsRepository,
     @Inject(PAYMENTS_SERVICE) private readonly paymentsService: ClientProxy,
   ) {}
 
@@ -24,7 +24,7 @@ export class ReservationsService {
       })
       .pipe(
         map((res) => {
-          return this.reservationsRepository.create({
+          return this.bondsRepository.create({
             ...createReservationDto,
             invoiceId: res.id,
             timestamp: new Date(),
@@ -35,21 +35,21 @@ export class ReservationsService {
   }
 
   async findAll() {
-    return this.reservationsRepository.find({});
+    return this.bondsRepository.find({});
   }
 
   async findOne(_id: string) {
-    return this.reservationsRepository.findOne({ _id });
+    return this.bondsRepository.findOne({ _id });
   }
 
   async update(_id: string, updateReservationDto: UpdateBondDto) {
-    return this.reservationsRepository.findOneAndUpdate(
+    return this.bondsRepository.findOneAndUpdate(
       { _id },
       { $set: updateReservationDto },
     );
   }
 
   async remove(_id: string) {
-    return this.reservationsRepository.findOneAndDelete({ _id });
+    return this.bondsRepository.findOneAndDelete({ _id });
   }
 }

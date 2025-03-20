@@ -19,5 +19,5 @@ export class BondDocument extends AbstractDocument {
   invoiceId: string;
 }
 
-export const ReservationSchema =
+export const bondschema =
   SchemaFactory.createForClass(BondDocument);

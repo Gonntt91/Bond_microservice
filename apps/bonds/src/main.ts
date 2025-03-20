@@ -4,10 +4,10 @@ import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
 import { Logger } from 'nestjs-pino';
 
-import { ReservationsModule } from './bonds.module';
+import { bondsModule } from './bonds.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(ReservationsModule);
+  const app = await NestFactory.create(bondsModule);
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useLogger(app.get(Logger));
   app.use(cookieParser());

@@ -11,10 +11,10 @@ RUN npm install -g pnpm
 
 RUN pnpm install
 
-COPY apps/reservations apps/reservations
+COPY apps/bonds apps/bonds
 COPY libs libs
 
-RUN pnpm run build reservations
+RUN pnpm run build bonds
 
 FROM node:alpine as production
 
@@ -32,4 +32,4 @@ RUN pnpm install --prod
 
 COPY --from=development /usr/src/app/dist ./dist
 
-CMD ["node", "dist/apps/reservations/main"]
+CMD ["node", "dist/apps/bonds/main"]
