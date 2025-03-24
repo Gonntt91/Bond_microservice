@@ -13,7 +13,9 @@ export class LocalStategy extends PassportStrategy(Strategy) {
     try {
       return await this.usersService.verifyUser(email, password);
     } catch (err) {
-      throw new UnauthorizedException(err);
+      console.log("validate err:  ", err)
+
+      throw new UnauthorizedException(err.message);
     }
   }
 }

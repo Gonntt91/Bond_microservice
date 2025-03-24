@@ -22,7 +22,7 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
 
     if (!document) {
       this.logger.warn('Document was not found with filterQuery', filterQuery);
-      throw new NotFoundException('Document was not found');
+      throw new NotFoundException(`${this.model.modelName} was not found`);
     }
 
     return document;

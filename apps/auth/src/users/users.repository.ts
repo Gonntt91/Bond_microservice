@@ -8,6 +8,8 @@ export class UsersRepository extends AbstractRepository<UserDocument> {
   protected readonly logger = new Logger(UsersRepository.name);
 
   constructor(@InjectModel(UserDocument.name) userModel: Model<UserDocument>) {
+    console.log("UserDocument.name:  ", UserDocument.name)
+
     super(userModel);
   }
 }
