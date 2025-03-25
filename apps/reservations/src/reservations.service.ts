@@ -17,21 +17,30 @@ export class ReservationsService {
     createReservationDto: CreateReservationDto,
     { email, _id: userId }: UserDto,
   ) {
-    return this.paymentsService
-      .send('create_charge', {
-        ...createReservationDto.charge,
-        email,
-      })
-      .pipe(
-        map((res) => {
-          return this.reservationsRepository.create({
-            ...createReservationDto,
-            invoiceId: res.id,
-            timestamp: new Date(),
-            userId,
-          });
-        }),
-      );
+
+    return this.reservationsRepository.create({
+      ...createReservationDto,
+      invoiceId: "111111",
+      timestamp: new Date(),
+      userId,
+    });
+
+
+    // return this.paymentsService
+    //   .send('create_charge', {
+    //     ...createReservationDto.charge,
+    //     email,
+    //   })
+    //   .pipe(
+    //     map((res) => {
+    //       return this.reservationsRepository.create({
+    //         ...createReservationDto,
+    //         invoiceId: res.id,
+    //         timestamp: new Date(),
+    //         userId,
+    //       });
+    //     }),
+    //   );
   }
 
   async findAll() {
