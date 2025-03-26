@@ -1,0 +1,35 @@
+Bond table
+
+1. employee_id | Approved_by |created_by | created_at
+    4          |       2     |      2    | 2025-03-25
+
+
+
+
+Employee table
+
+id | user_id | name ...
+2   | 2      | Chị Hạnh
+4   | 4      | Nghiem
+
+
+Role table
+id | employee_id | role_id | disable
+1  | 2           | manager | 1
+2  | 2           | employee| 0
+
+
+
+Employee table
+
+id | user_id | name ... | pw
+2   | 2      | Chị Hạnh
+4   | 4      | Nghiem
+
+Manager table
+id | user_id | name ... | pw
+2   | 2      | Chị Hạnh
+
+
+
+company table

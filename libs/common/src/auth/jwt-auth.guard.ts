@@ -32,7 +32,7 @@ export class JwtAuthGuard implements CanActivate {
       return false;
     }
 
-    const roles = this.reflector.get<string[]>('roles', context.getHandler());
+    const roles = this.reflector.get<string[]>('roles', context.getHandler()); // From decorator @Roles("...") not from jwt or auth
 
     return this.authClient
       .send<UserDto>('authenticate', {
@@ -51,6 +51,7 @@ export class JwtAuthGuard implements CanActivate {
           context.switchToHttp().getRequest().user = res;
         }),
         map(() => true),
+        
         catchError((err) => {
           this.logger.error(err);
           return of(false);

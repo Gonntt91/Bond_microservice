@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
 /**
- * @param _id: from frontend
+ * @param _id: from frontend/ client/ other service
  */
 
 export class GetUserDto {
