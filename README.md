@@ -9,8 +9,8 @@ $ pnpm install
 ## Running the app
 
 ```bash
-# development
-$ docker compose up
+# not pull again image (not update latest version), just use cached image
+$ docker compose up --no-build
 
 ```
 
