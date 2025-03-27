@@ -33,3 +33,27 @@ id | user_id | name ... | pw
 
 
 company table
+
+
+
+User:
+{
+    userId: 11111,
+    company: [
+        {
+        }
+    ]
+}
+
+Company:
+{
+    companyName: "Tesla",
+
+
+}
+
+
+User_Company:
+{
+    
+}
