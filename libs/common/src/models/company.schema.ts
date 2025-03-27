@@ -8,7 +8,7 @@ export enum PRIVILEGE {
 }
 
 
-@Schema()
+@Schema({versionKey: false, timestamps: true, collection: 'Company'})
 export class CompanyDocument extends Document {
   @Prop({ required: true, unique: true })
   companyCode: string;

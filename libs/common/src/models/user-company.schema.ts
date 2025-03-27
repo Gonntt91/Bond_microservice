@@ -9,7 +9,7 @@ export enum Role {
   EMPLOYEE = 'employee',
 }
 
-@Schema()
+@Schema({versionKey: false, timestamps: true, collection: 'UserCompany'})
 export class UserCompanyDocument extends Document {
   @Prop({ type: Types.ObjectId, ref: 'User', required: true })
   userId: Types.ObjectId;
