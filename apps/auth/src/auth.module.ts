@@ -25,9 +25,11 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     }),
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET'),
+        privateKey: configService.get<string>('JWT_PRIVATE_KEY'),
+        publicKey: configService.get<string>('JWT_PUBLIC_KEY'),
         signOptions: {
-          expiresIn: `${configService.get('JWT_EXPIRATION')}s`,
+          expiresIn: `${configService.get('JWT_EXPIRATION')}s` || `1h`,
+          algorithm: 'RS256',
         },
       }),
       inject: [ConfigService],

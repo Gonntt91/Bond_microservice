@@ -6,6 +6,10 @@
 $ pnpm install
 ```
 
+## Log and debug
+Give priority to use "console.log", not "logger"
+
+
 ## Running the app
 
 ```bash

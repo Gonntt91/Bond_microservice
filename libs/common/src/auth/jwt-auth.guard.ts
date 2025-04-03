@@ -1,61 +1,61 @@
-import {
-  CanActivate,
-  ExecutionContext,
-  Inject,
-  Injectable,
-  Logger,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
-import { Reflector } from '@nestjs/core';
-import { catchError, map, Observable, of, tap } from 'rxjs';
-import { AUTH_SERVICE } from '../constants/services';
-import { UserDto } from '../dto';
+// import {
+//   CanActivate,
+//   ExecutionContext,
+//   Inject,
+//   Injectable,
+//   Logger,
+//   UnauthorizedException,
+// } from '@nestjs/common';
+// import { ClientProxy } from '@nestjs/microservices';
+// import { Reflector } from '@nestjs/core';
+// import { catchError, map, Observable, of, tap } from 'rxjs';
+// import { AUTH_SERVICE } from '../constants/services';
+// import { UserDto } from '../dto';
 
-@Injectable()
-export class JwtAuthGuard implements CanActivate {
-  private readonly logger = new Logger(JwtAuthGuard.name);
+// @Injectable()
+// export class JwtAuthGuard implements CanActivate {
+//   private readonly logger = new Logger(JwtAuthGuard.name);
 
-  constructor(
-    @Inject(AUTH_SERVICE) private readonly authClient: ClientProxy,
-    private readonly reflector: Reflector,
-  ) {}
+//   constructor(
+//     @Inject(AUTH_SERVICE) private readonly authClient: ClientProxy,
+//     private readonly reflector: Reflector,
+//   ) {}
 
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
-    const jwt =
-      context.switchToHttp().getRequest().cookies?.Authentication ||
-      context.switchToHttp().getRequest().headers?.authentication;
+//   canActivate(
+//     context: ExecutionContext,
+//   ): boolean | Promise<boolean> | Observable<boolean> {
+//     const jwt =
+//       context.switchToHttp().getRequest().cookies?.Authentication ||
+//       context.switchToHttp().getRequest().headers?.authentication;
 
-    if (!jwt) {
-      return false;
-    }
+//     if (!jwt) {
+//       return false;
+//     }
 
-    const roles = this.reflector.get<string[]>('roles', context.getHandler()); // From decorator @Roles("...") not from jwt or auth
+//     const roles = this.reflector.get<string[]>('roles', context.getHandler()); // From decorator @Roles("...") not from jwt or auth
 
-    return this.authClient
-      .send<UserDto>('authenticate', {
-        Authentication: jwt,
-      })
-      .pipe(
-        tap((res) => {
-          if (roles) {
-            for (const role of roles) {
-              if (!res.roles?.includes(role)) {
-                this.logger.error('The user does not have valid roles.');
-                throw new UnauthorizedException();
-              }
-            }
-          }
-          context.switchToHttp().getRequest().user = res;
-        }),
-        map(() => true),
+//     return this.authClient
+//       .send<UserDto>('authenticate', {
+//         Authentication: jwt,
+//       })
+//       .pipe(
+//         tap((res) => {
+//           if (roles) {
+//             for (const role of roles) {
+//               if (!res.roles?.includes(role)) {
+//                 this.logger.error('The user does not have valid roles.');
+//                 throw new UnauthorizedException();
+//               }
+//             }
+//           }
+//           context.switchToHttp().getRequest().user = res;
+//         }),
+//         map(() => true),
         
-        catchError((err) => {
-          this.logger.error(err);
-          return of(false);
-        }),
-      );
-  }
-}
+//         catchError((err) => {
+//           this.logger.error(err);
+//           return of(false);
+//         }),
+//       );
+//   }
+// }
