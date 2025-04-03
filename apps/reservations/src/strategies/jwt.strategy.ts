@@ -1,15 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { TokenPayload } from '../interfaces/token-payload.interface';
-import { UsersService } from '../users/users.service';
+
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     configService: ConfigService,
-    private readonly usersService: UsersService,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
@@ -24,14 +23,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  // this is for validate JWT token
-  // it will be called when the token is valid
-  // if the token is not valid, it will throw an error
-  // if the token is valid, it will return the payload
-  // and the user will be authenticated
-  async validate({ userId }: TokenPayload) {
-    return this.usersService.getUser({ _id: userId });
-
-    // return null;
+  async validate(payload: TokenPayload) {
+    if (!payload.roles || !payload.roles.includes('Admin')) {
+      throw new UnauthorizedException('You do not have the required role.');
+    }
+    return payload;
   }
+
 }

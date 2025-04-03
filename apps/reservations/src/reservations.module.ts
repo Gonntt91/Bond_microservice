@@ -16,6 +16,7 @@ import {
 } from './models/reservation.schema';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         PAYMENTS_HOST: Joi.string().required(),
         AUTH_PORT: Joi.number().required(),
         PAYMENTS_PORT: Joi.number().required(),
+        JWT_PUBLIC_KEY: Joi.string().required(),
       }),
     }),
     ClientsModule.registerAsync([
@@ -62,6 +64,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     HealthModule,
   ],
   controllers: [ReservationsController],
-  providers: [ReservationsService, ReservationsRepository],
+  providers: [ReservationsService, ReservationsRepository, JwtStrategy],
 })
 export class ReservationsModule {}

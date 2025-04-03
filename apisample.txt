@@ -1,0 +1,17 @@
+
+Auth service API:
+
+    user: {
+        userId: "1111",
+
+        companies: [
+            {
+                companyName: "Tesla",
+                name:"Gon1"
+            },
+            {
+                companyName: "Microsoft",
+                name:"Gon2"
+            }
+        ]
+    }
