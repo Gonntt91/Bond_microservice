@@ -17,8 +17,5 @@ export class CreateBondDto {
   endDate: Date;
 
   @IsDefined()
-  @IsNotEmptyObject()
-  @ValidateNested()
-  @Type(() => CreateChargeDto)
-  charge: CreateChargeDto;
+  amount: number;
 }

@@ -8,49 +8,49 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { bondsService } from './bonds.service';
+import { BondService } from './bonds.service';
 import { CreateBondDto } from './dto/create-bond.dto';
 import { UpdateBondDto } from './dto/update-bond.dto';
-import { CurrentUser, JwtAuthGuard, Roles, UserDto } from '@app/common';
+import { CurrentUser, Roles, UserDto } from '@app/common';
 
 @Controller('bonds')
 export class bondsController {
-  constructor(private readonly bondsService: bondsService) {}
+  constructor(private readonly bondsService: BondService) {}
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post()
   async create(
-    @Body() createReservationDto: CreateBondDto,
+    @Body() createBondDto: CreateBondDto,
     @CurrentUser() user: UserDto,
   ) {
-    return this.bondsService.create(createReservationDto, user);
+    return this.bondsService.create(createBondDto, user);
   }
 
-  @Get()
-  @UseGuards(JwtAuthGuard)
-  async findAll() {
-    return this.bondsService.findAll();
-  }
+  // @Get()
+  // // @UseGuards(JwtAuthGuard)
+  // async findAll() {
+  //   return this.bondsService.findAll();
+  // }
 
-  @Get(':id')
-  @UseGuards(JwtAuthGuard)
-  async findOne(@Param('id') id: string) {
-    return this.bondsService.findOne(id);
-  }
+  // @Get(':id')
+  // @UseGuards(JwtAuthGuard)
+  // async findOne(@Param('id') id: string) {
+  //   return this.bondsService.findOne(id);
+  // }
 
-  @Patch(':id')
-  @UseGuards(JwtAuthGuard)
-  async update(
-    @Param('id') id: string,
-    @Body() updateReservationDto: UpdateBondDto,
-  ) {
-    return this.bondsService.update(id, updateReservationDto);
-  }
+  // @Patch(':id')
+  // // @UseGuards(JwtAuthGuard)
+  // async update(
+  //   @Param('id') id: string,
+  //   @Body() updateReservationDto: UpdateBondDto,
+  // ) {
+  //   return this.bondsService.update(id, updateReservationDto);
+  // }
 
-  @Delete(':id')
-  @UseGuards(JwtAuthGuard)
-  @Roles('Admin')
-  async remove(@Param('id') id: string) {
-    return this.bondsService.remove(id);
-  }
+  // @Delete(':id')
+  // // @UseGuards(JwtAuthGuard)
+  // @Roles('Admin')
+  // async remove(@Param('id') id: string) {
+  //   return this.bondsService.remove(id);
+  // }
 }

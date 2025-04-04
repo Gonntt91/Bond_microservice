@@ -9,12 +9,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Gonntt",
   "license": "ISC",
   "dependencies": {
-    "crypto-js":	"^4.2.0"
+    "@prisma/client": "^6.5.0",
+    "crypto-js": "^4.2.0"
   },
   "devDependencies": {
-    "@types/crypto-js": "^4.2.2"
+    "@types/crypto-js": "^4.2.2",
+    "prisma": "^6.5.0"
   }
 }

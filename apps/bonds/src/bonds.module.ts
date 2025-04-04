@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import * as Joi from 'joi';
-import { bondsService } from './bonds.service';
+import { BondService } from './bonds.service';
 import { bondsController } from './bonds.controller';
 import {
-  DatabaseModule,
+  AccountDatabaseModule,
   LoggerModule,
   AUTH_SERVICE,
   PAYMENTS_SERVICE,
@@ -17,11 +17,12 @@ import {
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { WalletModule } from './wallet/wallet.module';
+import { PrismaService } from './prisma/prisma.service';
 
 @Module({
   imports: [
-    DatabaseModule,
-    DatabaseModule.forFeature([
+    AccountDatabaseModule,
+    AccountDatabaseModule.forFeature([
       { name: BondDocument.name, schema: bondschema },
     ]),
     LoggerModule,
@@ -64,6 +65,6 @@ import { WalletModule } from './wallet/wallet.module';
     WalletModule,
   ],
   controllers: [bondsController],
-  providers: [bondsService, bondsRepository],
+  providers: [BondService, bondsRepository, PrismaService],
 })
 export class bondsModule {}

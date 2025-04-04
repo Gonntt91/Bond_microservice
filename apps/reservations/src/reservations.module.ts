@@ -3,7 +3,7 @@ import * as Joi from 'joi';
 import { ReservationsService } from './reservations.service';
 import { ReservationsController } from './reservations.controller';
 import {
-  DatabaseModule,
+  AccountDatabaseModule,
   LoggerModule,
   AUTH_SERVICE,
   PAYMENTS_SERVICE,
@@ -20,8 +20,8 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
-    DatabaseModule,
-    DatabaseModule.forFeature([
+    AccountDatabaseModule,
+    AccountDatabaseModule.forFeature([
       { name: ReservationDocument.name, schema: ReservationSchema },
     ]),
     LoggerModule,
